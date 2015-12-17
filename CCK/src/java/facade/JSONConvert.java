@@ -10,7 +10,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import entity.FlightInfo;
 import entity.Flightinstance;
+import java.util.List;
 
 /**
  *
@@ -22,11 +24,19 @@ public class JSONConvert {
 
     private static facade facade = new facade();
 
-    public static Flightinstance getLinkFromJson(String js) {
+    public static Flightinstance getFlightInstanseFromJson(String js) {
         return gson.fromJson(js, Flightinstance.class);
     }
 
-    public static String getJSONFromLink(Flightinstance fi) {
+    public static String getJSONFromFlightInstance(Flightinstance fi) {
+        return gson.toJson(fi);
+    }
+
+    public static String getJSONFromFlightInfo(List<FlightInfo> fi) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public static String getJSONFromFlightInfoList(List<FlightInfo> fi) {
         return gson.toJson(fi);
     }
 
