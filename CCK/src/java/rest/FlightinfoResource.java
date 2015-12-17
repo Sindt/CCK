@@ -39,6 +39,7 @@ public class FlightinfoResource {
     }
     facade facade = new facade();
 
+    //Quick fix!
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{from}/{date}/{passengers}")
@@ -53,9 +54,10 @@ public class FlightinfoResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{from}/{to}/{date}/{passengers}")
     public Response getJson(@PathParam("from") String from, @PathParam("to") String to, @PathParam("date") String date, @PathParam("passengers") int passengers) throws IOException {
-        List<FlightInfo> fi = facade.getFromToDatePassenger(from, to, date, passengers);
-        String json = JSONConvert.getJSONFromFlightInfo(fi);
-        return Response.ok(json).build();
+        List<FlightInfo> fiList = facade.getFromDatePassenger(from, date, passengers);
+        String json = JSONConvert.getJSONFromFlightInfoList(fiList);
+        String links = "{\"airlines\": \"CCK\",\n\"flights\":" + json + "}";
+        return Response.ok(links).build();
     }
 
     /**
